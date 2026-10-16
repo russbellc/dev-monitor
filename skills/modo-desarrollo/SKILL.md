@@ -1,15 +1,15 @@
 ---
 name: modo-desarrollo
-description: Activa el espacio de trabajo tri-panel en Herdr (Principal a la derecha al 50%, Monitor y Soporte a la izquierda al 50%) y lanza el Dev Monitor configurado automáticamente para el proyecto actual. Usar cuando el usuario diga "modo desarrollo", "activa modo desarrollo", "inicia modo desarrollo", "modo dev" o similares.
+description: Activa el espacio de trabajo tri-panel en Herdr (Principal a la derecha al 60%, Monitor y Soporte a la izquierda al 40%) y lanza el Dev Monitor configurado automáticamente para el proyecto actual. Usar cuando el usuario diga "modo desarrollo", "activa modo desarrollo", "inicia modo desarrollo", "modo dev" o similares.
 ---
 
 # Modo Desarrollo — Tri-Panel Workspace con Dev Monitor
 
 Esta skill organiza automáticamente el espacio de trabajo en Herdr en 3 paneles sincronizados según el estándar de desarrollo:
 
-1. **Panel Principal (Derecha - 50% ancho):** Sesión interactiva de desarrollo con Agy.
-2. **Panel Monitor (Izquierda-Arriba - 50% ancho):** `dev-monitor` TUI en tiempo real con auto-detección del proyecto actual.
-3. **Panel Soporte (Izquierda-Abajo - 50% ancho):** Terminal libre en la raíz del proyecto para que el usuario elija qué ejecutar (bash, comandos, pruebas, agy, codex, etc.).
+1. **Panel Principal (Derecha - 60% ancho):** Sesión interactiva de desarrollo con Agy.
+2. **Panel Monitor (Izquierda-Arriba - 40% ancho):** `dev-monitor` TUI en tiempo real con auto-detección del proyecto actual.
+3. **Panel Soporte (Izquierda-Abajo - 40% ancho):** Terminal libre en la raíz del proyecto para que el usuario elija qué ejecutar (bash, comandos, pruebas, agy, codex, etc.).
 
 ---
 

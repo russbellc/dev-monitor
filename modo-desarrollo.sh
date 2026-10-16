@@ -67,8 +67,8 @@ fi
 if [ "$NUM_PANES" -eq 1 ]; then
     echo "⚙️ Creando distribución tri-panel en este tab..."
     
-    # 4.1. Split a la derecha con ratio 0.50: deja 50% a la izquierda y 50% a la derecha
-    SPLIT_RIGHT=$(herdr pane split "${CALLER_PANE}" --direction right --ratio 0.50 2>/dev/null || echo "{}")
+    # 4.1. Split a la derecha con ratio 0.40: deja 40% a la izquierda y 60% a la derecha
+    SPLIT_RIGHT=$(herdr pane split "${CALLER_PANE}" --direction right --ratio 0.40 2>/dev/null || echo "{}")
     NEW_RIGHT_PANE=$(echo "$SPLIT_RIGHT" | jq -r '.result.pane.pane_id // .result.pane_id // empty')
     
     # 4.2. Swap: intercambiar para que CALLER_PANE (la sesión de Agy actual) pase a la derecha
