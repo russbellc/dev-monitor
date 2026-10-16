@@ -143,17 +143,14 @@ if [ -n "$MONITOR_PANE" ] && [ "$MONITOR_PANE" != "null" ]; then
     herdr pane run "${MONITOR_PANE}" "cd '${CURRENT_DIR}' && python3 '${MONITOR_BIN}' --project '${PROJECT_NAME}'" >/dev/null 2>&1 || true
 fi
 
-# 7. Lanzar sesión interactiva en Soporte si está libre
+# 7. Panel Soporte: Se deja como terminal libre a elección del usuario
 if [ -n "$SOPORTE_PANE" ] && [ "$SOPORTE_PANE" != "null" ]; then
-    S_INFO=$(echo "$TAB_PANES" | jq -r ".[] | select(.pane_id == \"${SOPORTE_PANE}\")")
-    S_AGENT=$(echo "$S_INFO" | jq -r '.agent // empty')
-    if [ -z "$S_AGENT" ] || [ "$S_AGENT" = "null" ]; then
-        echo "💬 Iniciando agente de consultas en [Soporte] (${SOPORTE_PANE})..."
-        herdr pane run "${SOPORTE_PANE}" "cd '${CURRENT_DIR}' && agy --dangerously-skip-permissions --model gemini-3.8-flash-low" >/dev/null 2>&1 || true
-    fi
+    echo "💻 Panel [Soporte] (${SOPORTE_PANE}) listo como terminal libre..."
+    # Sincronizar directorio de trabajo
+    herdr pane run "${SOPORTE_PANE}" "cd '${CURRENT_DIR}'" >/dev/null 2>&1 || true
 fi
 
 echo "✅ Modo Desarrollo activo en el tab [${CURRENT_TAB}]:"
 echo "   ├── [Principal] (${PRINCIPAL_PANE}): Vista principal de desarrollo"
 echo "   ├── [Monitor]   (${MONITOR_PANE}): Telemetría y Docker (${PROJECT_NAME})"
-echo "   └── [Soporte]   (${SOPORTE_PANE}): Consultas sin implementación"
+echo "   └── [Soporte]   (${SOPORTE_PANE}): Terminal libre (a tu elección)"
