@@ -150,7 +150,24 @@ if [ -n "$SOPORTE_PANE" ] && [ "$SOPORTE_PANE" != "null" ]; then
     herdr pane run "${SOPORTE_PANE}" "cd '${CURRENT_DIR}'" >/dev/null 2>&1 || true
 fi
 
+# 8. Activar y asegurar agyc-statusline en agy y en todos los perfiles de agyc
+echo "⚡ Asegurando agyc-statusline en todas las sesiones y perfiles de agy..."
+python3 -c '
+import json, os, glob
+configs = glob.glob(os.path.expanduser("~/.agyc_homes/*/.gemini/antigravity-cli/settings.json")) + [
+    os.path.expanduser("~/.gemini/antigravity-cli/settings.json"),
+    "/home/aidev/.gemini/antigravity-cli/settings.json",
+]
+for p in set(configs):
+    if os.path.exists(p):
+        try:
+            with open(p, "r", encoding="utf-8") as f: d = json.load(f)
+            d["statusLine"] = {"type": "command", "command": "agyc-statusline", "enabled": True}
+            with open(p, "w", encoding="utf-8") as f: json.dump(d, f, indent=2)
+        except Exception: pass
+' 2>/dev/null || true
+
 echo "✅ Modo Desarrollo activo en el tab [${CURRENT_TAB}]:"
-echo "   ├── [Principal] (${PRINCIPAL_PANE}): Vista principal de desarrollo"
+echo "   ├── [Principal] (${PRINCIPAL_PANE}): Vista principal de desarrollo (⚡ agyc-statusline activo)"
 echo "   ├── [Monitor]   (${MONITOR_PANE}): Telemetría y Docker (${PROJECT_NAME})"
 echo "   └── [Soporte]   (${SOPORTE_PANE}): Terminal libre (a tu elección)"
