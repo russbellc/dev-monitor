@@ -67,8 +67,8 @@ fi
 if [ "$NUM_PANES" -eq 1 ]; then
     echo "⚙️ Creando distribución tri-panel en este tab..."
     
-    # 4.1. Split a la derecha con ratio 0.40: deja 40% a la izquierda y 60% a la derecha
-    SPLIT_RIGHT=$(herdr pane split "${CALLER_PANE}" --direction right --ratio 0.40 2>/dev/null || echo "{}")
+    # 4.1. Split a la derecha con ratio 0.50: deja 50% a la izquierda y 50% a la derecha
+    SPLIT_RIGHT=$(herdr pane split "${CALLER_PANE}" --direction right --ratio 0.50 2>/dev/null || echo "{}")
     NEW_RIGHT_PANE=$(echo "$SPLIT_RIGHT" | jq -r '.result.pane.pane_id // .result.pane_id // empty')
     
     # 4.2. Swap: intercambiar para que CALLER_PANE (la sesión de Agy actual) pase a la derecha
@@ -113,11 +113,9 @@ elif [ "$NUM_PANES" -ge 3 ]; then
     fi
 fi
 
-# 5. Aplicar nombres y asegurar proporción 60% / 40%
+# 5. Aplicar nombres y asegurar proporción 50% / 50%
 if [ -n "$PRINCIPAL_PANE" ] && [ "$PRINCIPAL_PANE" != "null" ]; then
     herdr pane rename "${PRINCIPAL_PANE}" "Principal" >/dev/null 2>&1 || true
-    # Ajustar a 60% de ancho
-    herdr pane resize --pane "${PRINCIPAL_PANE}" --direction left --amount 0.15 >/dev/null 2>&1 || true
 fi
 if [ -n "$MONITOR_PANE" ] && [ "$MONITOR_PANE" != "null" ]; then
     herdr pane rename "${MONITOR_PANE}" "Monitor" >/dev/null 2>&1 || true
