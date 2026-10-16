@@ -89,6 +89,27 @@ dev-monitor --all
 
 ---
 
+## 🪟 Modo Desarrollo (Layout Tri-Panel en Herdr)
+
+Incluye un orquestador que organiza automáticamente tu pestaña en Herdr con la distribución ideal para programar con IA:
+* **Derecha (60% ancho):** `Principal` — Tu sesión interactiva de desarrollo (Agy / Codex).
+* **Izquierda-Arriba (40% ancho):** `Monitor` — `dev-monitor` corriendo en vivo para el proyecto actual.
+* **Izquierda-Abajo (40% ancho):** `Soporte` — Terminal limpia en la raíz del proyecto para tareas auxiliares.
+
+### Ejecución directa desde terminal
+```bash
+modo-desarrollo              # Auto-detecta el proyecto actual
+modo-desarrollo vitalab      # Especifica un proyecto puntual
+```
+
+### Skill para Agentes IA (Antigravity / Codex)
+Si utilizas agentes como Antigravity CLI o Codex, el instalador registra la skill `modo-desarrollo`. Solo tienes que pedirle en el chat:
+> *"modo desarrollo"*  o  *"modo dev"*
+
+Y el agente preparará y sincronizará los 3 paneles automáticamente.
+
+---
+
 ## ⌨️ Atajos de Teclado
 
 | Tecla | Acción |
