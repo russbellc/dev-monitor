@@ -132,8 +132,14 @@ fi
 
 if [ -n "$MONITOR_PANE" ] && [ "$MONITOR_PANE" != "null" ]; then
     echo "📊 Iniciando dev-monitor en panel [Monitor] (${MONITOR_PANE})..."
-    herdr pane send-keys "${MONITOR_PANE}" "q" >/dev/null 2>&1 || true
-    sleep 0.4
+    
+    # Solo enviar 'q' si ya hay un monitor corriendo en primer plano
+    IS_RUNNING_MONITOR=$(herdr pane process-info --pane "${MONITOR_PANE}" 2>/dev/null | jq -r '.result.process_info.foreground_processes[]? | select(.cmdline | test("monitor.py|dev-monitor")) | .pid' | head -1)
+    if [ -n "$IS_RUNNING_MONITOR" ]; then
+        herdr pane send-keys "${MONITOR_PANE}" "q" >/dev/null 2>&1 || true
+        sleep 0.5
+    fi
+
     herdr pane run "${MONITOR_PANE}" "cd '${CURRENT_DIR}' && python3 '${MONITOR_BIN}' --project '${PROJECT_NAME}'" >/dev/null 2>&1 || true
 fi
 
