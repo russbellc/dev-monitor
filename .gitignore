@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+.dev_monitor_config.json
+.vscode/
+.idea/
